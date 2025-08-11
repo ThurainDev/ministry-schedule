@@ -30,6 +30,32 @@ export default function ServiceCard({ serviceName, timeLabel }) {
   };
 
   const roles = rolesByTeam[effectiveTeam];
+  const times = Array.isArray(timeLabel) ? timeLabel : [timeLabel];
+
+  const Panel = ({ title, time, showTitle }) => (
+    <div className="rounded-xl p-6 bg-[#0B4D8C]/5 border border-[#0B4D8C]/20">
+      {showTitle && (
+        <div className="text-center font-semibold text-[#0B192C] mb-2 text-lg">
+          {title}
+        </div>
+      )}
+      <div className="text-center font-medium text-[#0B4D8C] mb-6">
+        {time}
+      </div>
+      <div className="grid grid-cols-2 gap-4 text-sm text-gray-800">
+        <div className="space-y-2">
+          {roles.map((role) => (
+            <div key={role}>{role}</div>
+          ))}
+        </div>
+        <div className="space-y-2 text-[#0B4D8C]">
+          {roles.map((_, idx) => (
+            <div key={idx}>Their Name</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="rounded-2xl bg-white/95 border border-[#0B4D8C]/20 shadow-lg p-6 backdrop-blur-sm">
@@ -59,26 +85,17 @@ export default function ServiceCard({ serviceName, timeLabel }) {
         })}
       </div>
 
-      <div className="rounded-xl p-6 bg-[#0B4D8C]/5 border border-[#0B4D8C]/20">
-        <div className="text-center font-semibold text-[#0B192C] mb-2 text-lg">
-          {displayTitle}
+      {/* Single or multiple panels */}
+      {times.length === 1 ? (
+        <Panel title={displayTitle} time={times[0]} showTitle />
+      ) : (
+        <div className="space-y-6">
+          <Panel title={displayTitle} time={times[0]} showTitle />
+          {times.slice(1).map((t, idx) => (
+            <Panel key={idx} title={displayTitle} time={t} />
+          ))}
         </div>
-        <div className="text-center font-medium text-[#0B4D8C] mb-6">
-          {timeLabel}
-        </div>
-        <div className="grid grid-cols-2 gap-4 text-sm text-gray-800">
-          <div className="space-y-2">
-            {roles.map((role) => (
-              <div key={role}>{role}</div>
-            ))}
-          </div>
-          <div className="space-y-2 text-[#0B4D8C]">
-            {roles.map((role, idx) => (
-              <div key={idx}>Their Name</div>
-            ))}
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -11,11 +11,11 @@ export default function MemberDashboard() {
 
   const sunday = {
     left: [
-      { name: 'Main Service', time: 'Time - 9 AM' },
-      { name: 'Main Service', time: 'Time - 12 PM' },
-      { name: 'Main Service', time: 'Time - 3 PM' },
+      { name: 'Main Service', time: ['Time - 9 AM', 'Time - 12 PM', 'Time - 3 PM'] },
     ],
-    right: [{ name: 'Children Service', time: 'Time - 9 AM' }],
+    right: [
+      { name: 'Children Service', time: 'Time - 9 AM' }
+    ],
   };
 
   const services = day === 'sunday' ? sunday : saturday;
