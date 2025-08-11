@@ -16,7 +16,7 @@ import {
             element : <App/>,
             children :[
                 {
-                    path : '/member',
+                    path : '/',
                     element : <MemberDashboard/>
                 },
                 {
