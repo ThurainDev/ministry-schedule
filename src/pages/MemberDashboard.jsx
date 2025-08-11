@@ -4,6 +4,11 @@ import ServiceCard from '../components/ServiceCard'
 export default function MemberDashboard() {
   const [day, setDay] = useState('saturday');
 
+  // Show today's date
+  const formattedDate = new Date().toLocaleDateString(undefined, {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
   const saturday = {
     left: [{ name: 'Fasting Service', time: 'Time - 9 AM' }],
     right: [{ name: 'The Arrow Service', time: 'Time - 2 PM' }],
@@ -24,7 +29,7 @@ export default function MemberDashboard() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-semibold text-center text-white drop-shadow mb-2">Media Team Schedule</h1>
+      <h1 className="text-3xl font-semibold text-center text-white drop-shadow mb-1">Media Team Schedule</h1>
 
       <div className="flex justify-center gap-3 md:gap-4">
         <button
@@ -44,6 +49,9 @@ export default function MemberDashboard() {
           Sunday Schedule
         </button>
       </div>
+
+      {/* Date under buttons */}
+      <div className="text-center text-white/90">{formattedDate}</div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left column services */}
